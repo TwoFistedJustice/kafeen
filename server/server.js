@@ -20,7 +20,8 @@ app.use(bodyParser.json());
 
 
 app.post('/listing', (req, res) => {
-  let address = new Address({companyName: req.body.companyName});
+  let addressData = {companyName, street, city, state, postalCode, phone, website} = req.body;
+  let address = new Address(addressData);
   address.save().then((doc) => {
     res.send(doc);
   }), (e) => {
