@@ -53,7 +53,7 @@ const addressSchema = new Schema({
 });
 
 
-const Address = mongoose.model('Address', addressSchema);
+const Address_model = mongoose.model('Address_model', addressSchema);
 
 
-module.exports = {Address};
+module.exports = {Address: Address_model};

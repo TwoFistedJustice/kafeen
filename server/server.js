@@ -13,7 +13,7 @@ const app = express();
 const port = 3000;
 
 
-const {Address} = require('./models/address');
+const {Biz} = require('./models/biz_model');
 
 const {getCoffeeHouseByLocation} = require('../yelp/yelpify');
 
@@ -25,18 +25,15 @@ app.use(bodyParser.json());
 
 
 
-app.post('/listing', (req, res) => {
-  
-  let addressData = {companyName, street, city, state, postalCode, phone, website} = req.body;
-  let address = new Address(addressData);
-  address.save().then((doc) => {
+app.post('/biz', (req, res) => {
+  let bizData = {yelpId, name, city, state} = req.body;
+  let biz = new Biz(bizData);
+  biz.save().then((doc) => {
     res.send(doc);
   }), (e) => {
   res.status(400).send('Unable to save because reasons');
   }
 });
-
-
 
 
 
