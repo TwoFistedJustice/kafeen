@@ -23,8 +23,6 @@ const {getCoffeeHouseByLocation} = require('../yelp/yelpify');
 app.use(bodyParser.json());
 
 
-
-
 app.post('/biz', (req, res) => {
   let bizData = {yelpId, name, city, state} = req.body;
   let biz = new Biz(bizData);
@@ -34,6 +32,24 @@ app.post('/biz', (req, res) => {
   res.status(400).send('Unable to save because reasons');
   }
 });
+
+
+app.get('/biz/:yelpId',(req, res) => {
+  let yelpId = req.params.yelpId;
+ Biz.findOne({yelpId}).then((biz) => {
+ // Biz.find().then((biz) => {
+   if (!biz) {
+     return res.status(404).send();
+   }
+   res.send({biz});
+   
+ }).catch((e) => {
+   res.status(400).send();
+ })
+});
+
+
+
 
 
 
