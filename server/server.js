@@ -12,6 +12,8 @@ const {mongoose} = require('./mongoose');
 const app = express();
 const port = 3000;
 
+var {getByYelpId} = require('../review/fetchFromDb');
+
 
 const {Biz} = require('./models/biz_model');
 
@@ -36,8 +38,8 @@ app.post('/biz', (req, res) => {
 
 app.get('/biz/:yelpId',(req, res) => {
   let yelpId = req.params.yelpId;
- Biz.findOne({yelpId}).then((biz) => {
- // Biz.find().then((biz) => {
+ Biz.findOne({yelpId})
+   .then((biz) => {
    if (!biz) {
      return res.status(404).send();
    }
@@ -50,7 +52,7 @@ app.get('/biz/:yelpId',(req, res) => {
 
 
 
-
+getByYelpId('E_wh6kpElcMX_S1tm3CJpw');
 
 
 app.listen(port, () => {
